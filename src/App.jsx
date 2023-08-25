@@ -1,10 +1,13 @@
-import Counter from './components/Counter';
 import './App.css';
+import Counter from './components/Counter';
+import Todo from './components/todo/Todo';
 
 export default function App() {
   return (
     <div className='container'>
-      <Counter />
+      <h1>Use reducer</h1>
+      {/* <Counter /> */}
+      <Todo />
     </div>
   );
 }

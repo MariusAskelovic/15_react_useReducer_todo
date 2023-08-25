@@ -2,28 +2,20 @@ import { useState } from 'react';
 import css from './Counter.module.css';
 import { useReducer } from 'react';
 
-const initCounterValue = { countNum: 0 };
+const initCounterValue = { countNum: 0, countTitle: 'Push Ups' };
 
 function counterReducer(state, action) {
-  //   console.log('state ===', state);
-  //   console.log('action ===', action);
-  //   if (action === 'UP') {
-  //     return { countNum: state.countNum + 1 };
-  //   } else if (action === 'DOWN') {
-  //     return { countNum: state.countNum - 1 };
-  //   } else if (action === 'RESET') {
-  //     return initCounterValue;
-  //   }
-
   switch (action.type) {
     case 'UP':
-      return { countNum: state.countNum + 1 };
+      return { ...state, countNum: state.countNum + 1 };
     case 'DOWN':
-      return { countNum: state.countNum - 1 };
+      return { ...state, countNum: state.countNum - 1 };
     case 'UPBY':
-      return { countNum: state.countNum + action.payloud };
+      return { ...state, countNum: state.countNum + action.payloud };
     case 'RESET':
       return initCounterValue;
+    case 'EDIT_TITLE':
+      return { ...state, countTitle: action.payloud };
 
     default:
       console.warn('tipas nerastas');
@@ -60,11 +52,15 @@ export default function Counter() {
     dispatch({ type: 'UPBY', payloud: howMuch });
     // dispatch({ type: 'UPBY', betkas: howMuch });
   }
+  function titleChange(event) {
+    dispatch({ type: 'EDIT_TITLE', payloud: event.target.value });
+  }
 
   //   console.log('cred ===', cred);
   return (
     <div className='card'>
-      <h2>Counter</h2>
+      <input onChange={titleChange} type='text' placeholder='Change title' />
+      <h2>{state.countTitle}</h2>
       <p className='counter'>{state.countNum}</p>
       <div>
         <button onClick={goUp}>UP</button>
