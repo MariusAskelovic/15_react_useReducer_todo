@@ -1,7 +1,9 @@
+import Counter from './components/Counter';
+
 export default function App() {
   return (
-    <div>
-      <h1>new topic</h1>
+    <div className='container'>
+      <Counter />
     </div>
-  )
+  );
 }
